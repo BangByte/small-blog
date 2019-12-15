@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" />
+		<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+		<style>
+			
+			a:hover{
+				text-decoration:none;
+			}
+			.yun img{
+				margin-right: 15px;
+				margin-top: 5px;
+				width: 40px;
+				height: 40px;
+			}
+			.navbar-header a{
+				font-size:23px;
+			}
+			.txtAllImg{
+				width: 100%;
+				height: 665px;
+				background-image: url(../../build/img/jianpan.jpg);
+				background-size: 100%;
+				padding-top: 70px;
+			}
+			#exampleInputAmount{
+				border-radius:4px;
+			}
+			.backwrite{
+				width: auto;
+				height: 545px;
+				background: #000000;
+				background: rgba(0,0,0, 0.5);
+				margin : 0px auto;
+				overflow:auto;
+				display: none;
+				border-radius:10px; 
+			}
+			.mynav_top{
+				opacity: 0.9;
+				margin : 0px auto;
+				width :1200px; 
+				border-bottom:0px solid black;
+			}
+	
+			.rightli{
+				position:fixed;
+				width: 100px;
+				margin-top: 28px;
+				margin-left: 200px;
+			}
+			.rightli .list-group-item{
+				border-bottom:0px solid black;
+				border-left: 0px solid black;
+				border-right: 0px solid black;
+				border-top: 0px solid black;
+			}
+			.rightli a:hover{
+				text-decoration:none;
+			}
+			.glyphicon{
+				left: 6px;
+			}
+			.wenzimokuai{
+				opacity: 1;
+				background-color:beige;
+			}
+
+			.twobar{
+				
+				border-radius:10px; 
+				background-color: white;
+				width: 700px;
+				margin : 0px auto;
+			}
+
+			
+			
+			#onetop{
+				padding-top: 40px;
+			}
+
+			
+			
+			#onetop img{
+				padding-top: 7px;
+				padding-left: 7px;
+			} 
+			#twotop img{
+				padding-top: 7px;
+				padding-left: 7px;
+			}
+			#threetop img{
+				padding-top: 7px;
+				padding-left: 7px;
+			}
+			#fourtop img{
+				padding-top: 7px;
+				padding-left: 7px;
+			}
+			#fivetop img{
+				padding-top: 7px;
+				padding-left: 7px;
+			}
+			#sixtop img{
+				padding-top: 7px;
+				padding-left: 7px;
+			}
+			#seventop img{
+				padding-top: 7px;
+				padding-left: 7px;
+			}
+			#eighttop img{
+				padding-top: 7px;
+				padding-left: 7px;
+			}
+			
+			
+
+			.twobar:hover{
+				width: 720px;
+			}
+
+			
+			
+			
+			#sevenhome span{
+				color: dodgerblue;
+			}
+			#twohome span{
+				color: dodgerblue;
+			}
+			#threehome span{
+				color: dodgerblue;
+			}
+			#fourhome span{
+				color: dodgerblue;
+			}
+			#fivehome span{
+				color: dodgerblue;
+			}
+			#sixhome span{
+				color: dodgerblue;
+			}
+			#eighthome span{
+				color: dodgerblue;
+			}
+			
+			
+			.yuedu{
+				padding-top: 10px;
+			}
+			.smalll{
+				color: black;
+				padding-left: 8px;
+			}
+			
+			
+			
+			.sousuo{
+				float: right;
+				margin-top: 8px; 
+			}
+			
+			.top_quanwenzhang:hover{
+				border-bottom:1px solid black;
+			}
+
+
+			
+		</style>
+		<script>
+			// $("#mytab a:last").tab("show")
+			
+			$("#onetop").css("display","none");
+			$(function(){
+				$('[data-toggle="popover"]').popover()
+				$(".quanbuwenzhang").click(function(){
+					$(".wenzimokuai").css("display","none");
+					// $(".threebar").css("display","block");
+					$("#onetop").css("display","block");
+					$(".twobar").css("display","block");
+					// $(".fourbar").css("display","block");
+					// $(".fivebar").css("display","block");
+					// $(".sixbar").css("display","block");
+					// $(".eightbar").css("display","block");
+					// $(".sevenbar").css("display","block");
+				})
+
+			})
+			
+		</script>
+		
+	</head>
+	<body>
+		<div class="txtAllImg">
+			<nav class="navbar navbar-default navbar-fixed-top mynav mynav_top container">
+			  <div class="container">
+			    <div class="navbar-header">
+			      <div class="yun navbar-header">
+			      	<a><img src="../../build/img/3.png" /></a>
+			      </div>
+			    </div>
+				<div class="navbar-header">
+					<a href="/front" class="navbar-brand top_quanwenzhang">Home</a>
+				</div>
+			    <div id="navbar" class="navbar-collapse collapse">
+			      <ul class="nav navbar-nav">
+			        <li class="quanbuwenzhang top_quanwenzhang "><a href="#onehome" id="all">全部文章</a></li>
+			        <li class="dropdown">
+			          <a href="#" class="dropdown-toggle top_quanwenzhang" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">归档 <span class="caret"></span></a>
+			          <ul class="dropdown-menu">
+						<li class="quanbuwenzhang " id="javabut"><a href="#eighthome">Java</a></li>
+						<li role="separator" class="divider"></li>
+			            <li class="quanbuwenzhang " id="springbut"><a href="#twohome">Spring</a></li>
+			            <li class="quanbuwenzhang " id="springmvcbut"><a href="#threehome">Spring MVC</a></li>
+			            <li class="quanbuwenzhang " id="springbootbut"><a href="#fourhome">Spring Boot</a></li>
+						<li class="quanbuwenzhang " id="springcloudbut"><a href="#fivehome">Spring Cloud</a></li>
+			            <li role="separator" class="divider"></li>
+			            <li class="quanbuwenzhang " id="mybatisbut"><a href="#sixhome">Mybatis</a></li>
+						<li role="separator" class="divider"></li>
+						<li class="quanbuwenzhang " id="linuxbut"><a href="#sevenhome">Linux</a></li>
+					  </ul>
+			        </li>
+					
+			      </ul>
+				  <div class="sousuo">
+				  	<form class="form-inline" role="form">
+				  		<div class="form-group">
+				  				<!--<div class="input-group ">-->
+				  					<!--<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">-->
+				  				<!--</div>-->
+				  		</div>
+						<!--<a id="sousuo" tabindex="0" class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus"  data-content="没有记录">-->
+							<!--Go</a>-->
+				  	</form>
+
+				  </div>
+			    </div><!--/.nav-collapse -->
+			  </div>
+			</nav>
+			<div class="container ">
+
+				  <div class="jumbotron tab-pane wenzimokuai">
+					<div id="lottie"></div>
+						<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.4.3/lottie.min.js"></script>
+						<!--<script type="text/javascript" src="../../build/img/jiangbei.json"></script>-->
+						
+						<script>
+							var params = {
+								container: document.getElementById('lottie'),
+								renderer: 'svg',
+								loop: true,
+								autoplay: true,
+								path:"../../build/img/jiangbei.json"
+							};
+							lottie.loadAnimation(params);
+						</script>
+					<p>
+					  <a class="btn btn-lg btn-primary  quanbuwenzhang  " href="#onehome" role="button">全部文章 &raquo;</a>
+					</p>
+				  </div>
+				  
+				<div class="tab-content  backwrite" id="onetop">
+
+					<script th:inline="javascript">
+                        var divs = document.getElementById("onetop")
+						var list = [[${list}]]
+						for(var i=0;i<list.length;i++){
+						    var id = list[i].id
+						    var title = list[i].title
+                            var saveTime = list[i].saveTime
+							var flag = list[i].flag
+                            divs.innerHTML+="<div class=\"tab-pane twobar\"><ul class=\"list-unstyled\"><li><a class=\"media-left\" href=\"#\"><img src=\"../../build/img/64.png\" alt=\"adf\" ></a><div class=\"media-body\"><h4 class=\"hh4\"></h4><p>摘要</p><p>简介</p>#<span style='color: #00CCFF' class=\"times\"></span><small class=\"smalll\">Spring</small></div><div class=\"media-left yuedu\"><a class=\"mhref btn btn-default\" role=\"button\" ><span>阅读文章&raquo;</span></a></div></li></ul></div>"
+							document.getElementsByClassName("hh4")[i].innerText = title
+                            document.getElementsByClassName("times")[i].innerText = saveTime
+                            document.getElementsByClassName("smalll")[i].innerText = flag
+							document.getElementsByClassName("mhref")[i].setAttribute("href","/read/"+id)
+
+						}
+						function check(temp){
+                            for(var i = 0;i<list.length;i++){
+                                if(document.getElementsByClassName("smalll")[i].innerHTML != temp){
+                                    var div1 = document.getElementsByClassName("smalll")[i].parentNode
+                                    var li1 = div1.parentNode
+                                    var ul1 = li1.parentNode
+                                    ul1.style.display = "none"
+                                }else{
+                                    var div1 = document.getElementsByClassName("smalll")[i].parentNode
+                                    var li1 = div1.parentNode
+                                    var ul1 = li1.parentNode
+                                    ul1.style.display = "block"
+								}
+                            }
+						}
+                        var java = document.getElementById("javabut")
+                        java.onclick = function () {
+                            check("Java")
+                        }
+                       	var spring = document.getElementById("springbut")
+						spring.onclick = function () {
+                            check("Spring")
+                        }
+                        var mybatis = document.getElementById("mybatisbut")
+						mybatis.onclick = function () {
+                            check("Mybatis")
+                        }
+                        var springmvc = document.getElementById("springmvcbut")
+                        springmvc.onclick = function () {
+                            check("SpringMVC")
+                        }
+                        var springboot = document.getElementById("springbootbut")
+                        springboot.onclick = function () {
+                            check("SpringBoot")
+                        }
+                        var springcloud = document.getElementById("springcloudbut")
+                        springcloud.onclick = function () {
+                            check("SpringCloud")
+						}
+                        var linux = document.getElementById("linuxbut")
+                        linux.onclick = function () {
+                            check("Linux")
+                        }
+
+                        var all = document.getElementById("all")
+                            all.onclick = function () {
+                                for(var i = 0;i<list.length;i++){
+                                    var div1 = document.getElementsByClassName("smalll")[i].parentNode
+                                    var li1 = div1.parentNode
+                                    var ul1 = li1.parentNode
+                                    ul1.style.display = "block"
+                                }
+                         }
+
+					</script>
+				</div>
+				
+			</div>
+		</div>
+	
+	</body>
+</html>

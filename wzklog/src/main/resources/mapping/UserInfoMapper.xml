@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.log.wzklog.mapper.UserInfoMapper">
+	<select id="selUser" resultType="userInfo">
+		select * from userinfo where username = #{username} and password = #{password}
+	</select>
+
+	<select id="selByNameOrPhone" parameterType="string" resultType="userInfo">
+		select * from userinfo where username = #{username} or phone = #{phone}
+	</select>
+
+	<insert id="saveUser" parameterType="userInfo" useGeneratedKeys="true" keyColumn="id"
+			keyProperty="id">
+		insert into userinfo(username,password,id,phone,flag)
+		values(#{userName},#{password},#{id},#{phone},#{flag})
+	</insert>
+
+	<update id="upPassword">
+		update userinfo set password = #{password} where  phone = #{phone}
+	</update>
+
+	<select id="selPhone" resultType="userInfo" parameterType="string">
+		select * from userinfo where phone = #{phone}
+	</select>
+
+	<insert id="saveContent" parameterType="saveSend" useGeneratedKeys="true"
+			keyColumn="id" keyProperty="id">
+		insert into savesend(id,title,content,savetime,flag) values (#{id},#{title},
+		#{content},#{saveTime},#{flag})
+	</insert>
+
+	<select id="selCount" resultType="saveSend">
+		select * from savesend
+	</select>
+
+	<select id="selCountId" parameterType="int" resultType="saveSend">
+		select * from savesend where id = #{id}
+	</select>
+
+	<delete id="deleteTextId" parameterType="int">
+		delete from savesend where id = #{id}
+	</delete>
+
+	<update id="updateTextId">
+		update savesend set title = #{title} ,flag = #{flag} where  id = #{id}
+	</update>
+</mapper>
+
+

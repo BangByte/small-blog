@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>登录 </title>
+		
+		<script src="../build/js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+	<style>
+		/*.login_content{*/
+    /*position: fixed;*/
+/*}	*/
+ .wjmm{
+	display: none;
+}
+	</style>
+  </head>
+
+  <body class="login">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+
+      <div class="login_wrapper ">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form action="/userLogin" method="post">
+              <h1>用户登录</h1>
+              <div>
+                  <span
+                        th:style="${session.user==null ?'':session.user.flag=='lose'?'color: red':'color: green'}"
+                        th:text="${session.user==null ?'':session.user.flag=='lose'?'用户名或密码错误':'创建成功-请登录'}"></span>
+                <input type="text" class="form-control usern" name="username" placeholder="Username" required="" />
+
+              </div>
+
+              <div>
+                <input type="password" class="form-control usern" name="password" placeholder="Password" required="" />
+              </div>
+              <div>
+                <input type="submit" value="登录" class="btn btn-info submit create" href="index.html" />
+                <a class="reset_pass shows" id="wjbt" href="#wjmm">忘记密码?</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link create">没有账号?
+                  <a href="#signup" class="to_register">创建</a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i></h1>
+                  <p>©2020&nbsp版权归王泽康所有&nbsp毕设</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <div id="register" class="animate form registration_form">
+          <section class="login_content">
+            <form action="/createUser" method="post">
+              <h1>创建账号</h1>
+              <div>
+                  <span    style="color: red"
+                          th:text="${session.nameinfo==null ?'':session.nameinfo}"></span>
+                <input type="text" class="form-control" name="createuser" placeholder="Username" required="" />
+              </div>
+              <div>
+                  <span    style="color: red"
+                           th:text="${session.phoneinfo==null ?'':session.phoneinfo}"></span>
+                <input type="text" class="form-control" name="createphone" placeholder="phone" required="" />
+              </div>
+              <div>
+                <input type="password" class="form-control" name="createpassword" placeholder="Password" required="" />
+              </div>
+              <div>
+                <input type="submit" value="创建" class="btn btn-info submit" href="index.html" />
+                <!--<a class="btn btn-default submit" href="index.html">创建</a>-->
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">已有账号?
+                  <a href="#signin" class="to_register">登录</a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i></h1>
+                  <p>©2020&nbsp版权归王泽康所有&nbsp毕设</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+				
+			<script>
+
+                function forget(){
+                    var newCipher = document.getElementById("txt_departmentname").value;
+                    var newOkCipher = document.getElementById("txt_parentdepartment").value;
+                    var xhr = null;
+                    if(window.XMLHttpRequest){
+                        xhr = new XMLHttpRequest();
+                    }else{
+                        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+
+                    xhr.onreadystatechange=function()
+                    {
+                        if(xhr.readyState == 4){
+                            if(xhr.status == 200){
+                                //alert("aaaaa");
+                                var jsonString = xhr.responseText;
+
+                                eval("var jsonObj = "+jsonString)
+                                var newC = document.getElementById("newC")
+                                if(jsonObj.success != null){
+                                    if(jsonObj.success){
+                                        newC.style.color="green"
+                                        newC.innerText="密码一致"
+                                    }else{
+                                        newC.style.color="red"
+                                        newC.innerText="密码不一致"
+                                    }
+                                }else{
+                                    if(jsonObj.kong){
+                                        newC.style.color="red"
+                                        newC.innerText="密码不能为空"
+                                    }
+                                }
+
+                            }else{
+                                //alert(xhr.status);
+                            }
+                        }
+                    }
+
+                    xhr.open("POST","/forget",true);
+                    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+
+                    xhr.send("newcipher="+newCipher+"&newOkcipher="+newOkCipher);
+                }
+
+                var maxtime = 5
+                var start
+                function timeStr() {
+                    document.getElementById("sendinfo").disabled = true
+                    document.getElementById("time").innerHTML = maxtime+"s"
+                    maxtime-=1
+                    start = setTimeout(function () {
+                        timeStr()
+                    }, 1000)
+                    if(maxtime < 0){
+                        clearTimeout(start);
+                        document.getElementById("time").innerHTML = ""
+                        document.getElementById("sendinfo").disabled = false
+                        maxtime = 5
+                    }
+                }
+
+                function phone(){
+                    var phone = document.getElementById("exampleInputEmail2").value;
+                    var xhr = null;
+                    if(window.XMLHttpRequest){
+                        xhr = new XMLHttpRequest();
+                    }else{
+                        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+
+                    xhr.onreadystatechange=function()
+                    {
+                        if(xhr.readyState == 4){
+                            if(xhr.status == 200){
+                                var jsonString = xhr.responseText
+                                eval("var jsonObj = " + jsonString)
+                                var sendinfo = document.getElementById("sendinfo");
+                                if(jsonObj.isphone != null){
+                                    if(jsonObj.isphone){
+                                        if(jsonObj.logon){
+                                            timeStr()
+                                            alert("已发送验证")
+                                        }else{
+                                            alert("该手机号未注册")
+                                        }
+                                    }else{
+                                        alert("手机号不合法")
+                                    }
+                                }else{
+                                    if(jsonObj.isnull){
+                                        alert("手机号不能为空")
+                                    }
+                                }
+                            }
+                        }else{
+                            //alert(xhr.status);
+                        }
+                    }
+
+                    xhr.open("POST","/phone",true);
+                    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+
+                    xhr.send("phone="+phone);
+                }
+
+
+                function sendPN(){
+                    var phone = document.getElementById("exampleInputEmail2").value;
+                    var note = document.getElementById("txt_statu").value;
+                    var xhr = null;
+                    if(window.XMLHttpRequest){
+                        xhr = new XMLHttpRequest();
+                    }else{
+                        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+
+                    xhr.onreadystatechange=function()
+                    {
+                        if(xhr.readyState == 4){
+                            if(xhr.status == 200){
+                                var jsonString = xhr.responseText
+                                eval("var jsonObj = " + jsonString)
+                                if(jsonObj.isOk){
+                                    if(jsonObj.newPW && jsonObj.check){
+                                        $(".remvo").addClass("wjmm");
+                                        $(".usern").removeAttr("disabled");
+                                        $(".create").css("display","");
+
+                                        document.getElementById("txt_departmentname").value=""
+                                        document.getElementById("txt_parentdepartment").value=""
+                                        document.getElementById("exampleInputEmail2").value=""
+                                        document.getElementById("txt_statu").value=""
+
+                                        alert("修改成功-请登录")
+                                    }else{
+                                        alert("请完善各项内容")
+                                    }
+                                }else{
+                                    alert("手机号或验证码错误")
+                                }
+                            }
+                        }else{
+                            //alert(xhr.status);
+                        }
+                    }
+
+                    xhr.open("POST","/noteCheck",true);
+                    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+                    xhr.send("phone="+phone+"&note="+note);
+                }
+
+			$(function(){  
+					// $(".wjmm").css('display','none')
+
+                $(".shows").click(function(){
+                    // $(".wjmm").css('display','')
+                    $(".remvo").removeClass("wjmm");
+                    $(".usern").attr("disabled","disabled");
+                    $(".create").css("display","none");
+                });
+
+
+                $(".close").click(function(){
+                    $(".remvo").addClass("wjmm");
+                    $(".usern").removeAttr("disabled");
+                    $(".create").css("display","");
+                    $("#txt_departmentname").val("")
+                    $("#txt_parentdepartment").val("")
+                    $("#exampleInputEmail2").val("")
+                    $("#txt_statu").val("")
+                    $("#newC").empty()
+                });
+
+                $(".guanbi").click(function(){
+                    $(".remvo").addClass("wjmm");
+                    $(".usern").removeAttr("disabled");
+                    $(".create").css("display","");
+                });
+			});
+			
+// 				function cha(){
+// 					document.querySelector(".wjmm").style.display="none";
+// 				}
+// 				
+// 				function show(){
+// 						document.querySelector(".wjmm").style.display="";
+// 				}
+				
+			</script>
+
+    </div>
+        <div style="z-index: 9999; position: fixed;" id="wjdiv" class=" wjmm remvo  col-md-3" role="document">
+        <div class="modal-content" >
+            <div class="modal-header">
+                <button type="button" class="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" >忘记密码</h4>
+            </div>
+            <div class="modal-body">
+
+                <!--<div class="form-group">-->
+            <!--</div>-->
+
+                <div class="form-group">
+                    <label for="txt_departmentname">新密码</label>
+                    <input type="text" name="txt_departmentname"  onblur="forget()" class="form-control" id="txt_departmentname" placeholder="新密码">
+                </div>
+                <div class="form-group">
+                    <label for="txt_parentdepartment">确认新密码</label>&nbsp;&nbsp;<small id="newC" ></small>
+                    <input type="text" name="txt_parentdepartment" onblur="forget()" class="form-control" id="txt_parentdepartment" placeholder="确认新密码">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail2">手机号</label>
+                    <input type="text" class="form-control"  id="exampleInputEmail2" placeholder="11位内地手机号">
+                </div>
+                <button type="submit" class="btn btn-info" id="sendinfo" onclick="phone()">发送短信验证</button><small id="time"></small>
+                <div class="form-group">
+                    <label for="txt_statu">短信验证码</label>
+                    <input type="text" name="txt_statu" class="form-control" id="txt_statu" placeholder="短信验证码">
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button"  id="btn_submit" onclick="sendPN()" class="btn btn-primary subf" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;&nbsp;提交</button>
+            </div>
+        </div>
+
+    </div>
+    </div>
+  </body>
+</html>

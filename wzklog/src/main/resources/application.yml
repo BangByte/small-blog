@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  jackieonway:
+    sms:
+      sms-type: tencent
+      security-key: 0d6ab07c2743599b3ed480ffd7be67e3
+      appid: 1400234979
+      sign: 蕊日志
+  datasource:
+    username: root
+    password: 666666
+    url: jdbc:mysql://localhost:3306/wzklog?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath*:mapping/*Mapper.xml
+  #如果mapper类和mapper.xml不在同一个路径下时,使用。同路径下@MapperScan扫描
+  type-aliases-package: com.log.wzklog.bo #缩写mapper的返回类型
+
+logging:
+  level:
+    com:
+      log:
+        wzklog:
+          mapper: debug
